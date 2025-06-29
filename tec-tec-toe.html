@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        div#container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            /* margin-left: 400px; */
+            padding: 60px 300px;
+            height: 450px;
+            /* border: 2px solid red; */
+
+        }
+
+        #container>div {
+            border: 2px solid green;
+            width: 30%;
+            display: flex;
+            justify-content: space-around;
+            height: 160px;
+        }
+
+        .mark {
+            display: inline-block;
+            font-size: 130px;
+            font-family: sans-serif;
+            font-weight: 100;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <div id="box1" onclick="draw(1)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box2" onclick="draw(2)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box3" onclick="draw(3)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box4" onclick="draw(4)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box5" onclick="draw(5)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box6" onclick="draw(6)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box7" onclick="draw(7)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box8" onclick="draw(8)">
+            <p class="mark"> </p>
+        </div>
+        <div id="box9" onclick="draw(9)">
+            <p class="mark"> </p>
+        </div>
+
+        <button class="button" style="margin: 30px; font-size: large;"> Play Now</button>
+    </div>
+
+    <p id="demo"> NOONW </p>
+
+
+    <script>
+        player_turn = 0;
+        const combinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 5, 9], [3, 5, 7], [2, 5, 8], [1, 4, 7], [3, 6, 9]];
+        const X = [];
+        const O = [];
+
+
+        function declareWinner() {
+            let counter = 0;
+            let winner = false;
+
+            for (let i = 0; i < combinations.length; i++) {
+                if (X.indexOf(combinations[i][0]) != -1 && X.indexOf(combinations[i][1]) != -1 && X.indexOf(combinations[i][2]) != -1) {
+                    winner = 'X';
+                }
+
+                else if (O.indexOf(combinations[i][0]) != -1 && O.indexOf(combinations[i][1]) != -1 && O.indexOf(combinations[i][2]) != -1) {
+                    winner = 'O';
+                }
+            }
+            console.log(counter);
+            if (winner) {
+                document.getElementById("demo").innerHTML = "WINNER " + winner;
+            }
+
+
+        }
+
+
+
+        function draw(boxNumber) {
+            if (player_turn == 0) {
+                document.getElementsByClassName("mark")[boxNumber - 1].innerHTML = "X";
+                X.push(boxNumber);
+                player_turn = 1;
+
+                if (X.length >= 3) {
+                    declareWinner();
+                }
+                // console.log(X);
+                // console.log(O);
+            }
+
+            else if (player_turn == 1) {
+                document.getElementsByClassName("mark")[boxNumber - 1].innerHTML = "O";
+                player_turn = 0;
+                O.push(boxNumber);
+                if (O.length >= 3) {
+                    declareWinner();
+                }
+
+            }
+        }
+
+        /**
+         * 1. sort the player array :ex. [2,5,4] => [2,4,5]
+         * 2. compare sortedArray against the combinations
+         * 3. declare the winner based on the flag
+         * */
+            //const sortedArray = sortAray()
+            // comparison logic
+            // alert/html winner is --- <>
+
+    </script>
+
+
+</body>
+
+</html>
